@@ -32,7 +32,7 @@ module SlackRubyBot
       help_attrs = find_command_help_attrs(unescaped_name)
       return "There's no command *#{unescaped_name}*" unless help_attrs
       return "There's no description for command *#{unescaped_name}*" if help_attrs.command_long_desc.blank?
-      "#{command_name_and_desc(help_attrs)}\n\n#{help_attrs.command_long_desc}"
+      block_given? ? yield : "#{command_name_and_desc(help_attrs)}\n\n#{help_attrs.command_long_desc}"
     end
 
     private
